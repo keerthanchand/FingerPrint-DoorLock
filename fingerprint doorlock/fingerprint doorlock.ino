@@ -1,6 +1,5 @@
 
 
-// initialize the library with the numbers of the interface pins
 
 #include <Servo.h>
 
@@ -21,8 +20,7 @@ int pos = 0;
   
   if(finger.fingerID==8 || finger.fingerID==1 ||finger.fingerID==2 ||finger.fingerID==3 ||finger.fingerID==4 ||finger.fingerID==5 ||finger.fingerID==6 ||finger.fingerID==7 )
   {
-  Serial.println("Welcome MR.xxxxxxxx");//i enroled ID no 1 as Nidhi'sfingerprint, so used this line to display corresponding name
-  
+  Serial.println("Welcome MR.xxxxxxxx");
  
   digitalWrite(8,HIGH);
   myservo.write(60);
@@ -52,7 +50,7 @@ void setup()
   Serial.println("fingertest");
  finger.begin(57600);
  myservo.attach(9);
-  pinMode(8,OUTPUT);//Pin connectet to relay
+  pinMode(8,OUTPUT);
   
   if (finger.verifyPassword())
   {
@@ -67,7 +65,7 @@ void setup()
 
   
   
-  void loop()                     // run over and over again
+  void loop()                    
 {
       
   if(getFingerprintIDez()>=0)
@@ -101,7 +99,6 @@ uint8_t getFingerprintID()
       return p;
   }
 
-  // OK success!
 
   p = finger.image2Tz();
   switch (p) 
@@ -126,7 +123,6 @@ uint8_t getFingerprintID()
       return p;
   }
   
-  // OK converted!
   p = finger.fingerFastSearch();
   if (p == FINGERPRINT_OK)
   {
@@ -142,12 +138,10 @@ uint8_t getFingerprintID()
     return p;
   }   
   
-  // found a match!
   Serial.print("Found ID #"); Serial.print(finger.fingerID); 
   Serial.print(" with confidence of "); Serial.println(finger.confidence); 
 }
 
-// returns -1 if failed, otherwise returns ID #
 int getFingerprintIDez() {
   uint8_t p = finger.getImage();
   if (p != FINGERPRINT_OK)  return -1;
@@ -158,7 +152,6 @@ int getFingerprintIDez() {
   p = finger.fingerFastSearch();
   if (p != FINGERPRINT_OK)  return -1;
   
-  // found a match!
   Serial.print("Found ID #"); Serial.print(finger.fingerID); 
   Serial.print(" with confidence of "); Serial.println(finger.confidence);
   return finger.fingerID; 
