@@ -7,6 +7,7 @@ Servo myservo;
 #include <Adafruit_Fingerprint.h>
 #include <SoftwareSerial.h>
 
+
 int getFingerprintIDez();
 SoftwareSerial mySerial(2, 3);// tx, rx
 
@@ -46,7 +47,8 @@ void doorClose()
 void setup()  
 {
  
-  Serial.begin(38400);
+  Serial.begin(9600);
+ myservo.write(pos);
   Serial.println("fingertest");
  finger.begin(57600);
  myservo.attach(9);
